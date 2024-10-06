@@ -9,7 +9,7 @@ public abstract class Entity
     }
     public Guid Id { get; init; }
 
-    private IReadOnlyCollection<IDomainEvent> GetDomainEvents()
+    public IReadOnlyCollection<IDomainEvent> GetDomainEvents()
     {
         return _domainEvents.ToList();
     }

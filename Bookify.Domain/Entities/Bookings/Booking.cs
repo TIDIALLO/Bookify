@@ -38,6 +38,8 @@ public sealed class Booking : Entity
     public Money CleaningFee { get; private set; }
     public Money AmenitiesUpcharge { get; private set; }
     public Money TotalPrice { get; private set; }
+    public Money PriceForPeriod { get; private set; }
+
     public BookingStatus Status { get; private set; }
     public DateTime CreatedOnUtc { get; private set; }
     public DateTime? ConfirmedOnUtc { get; private set; }
