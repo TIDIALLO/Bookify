@@ -12,10 +12,10 @@ public sealed class Booking : Entity
         Guid apartmentId,
         Guid userId,
         DateRange duration,
+        Money PriceForPeriod,
         Money cleaningFee,
         Money amenitiesUpcharge,
         Money totalPrice,
-        Money totalPrice1,
         BookingStatus status,
         DateTime createdOnUtc
     ) : base(id)

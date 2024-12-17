@@ -42,9 +42,9 @@ public class Result<TValue> : Result
         _value = value;
     }
     [NotNull]
-    private TValue Value => IsSuccess
-        ? _value
+    public TValue Value => IsSuccess
+        ? _value!
         : throw new InvalidOperationException("The value of a fiailure result cannot be accessed. ");
 
-    public static implicit operator Result<TValue>(TValue? value) => Create(value);
+    public static implicit operator Result<TValue>(TValue? value) => Create(value)!;
 }

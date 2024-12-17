@@ -3,6 +3,7 @@ using Bookify.Application.Abstractions.Data;
 using Bookify.Application.Abstractions.Messaging;
 using Bookify.Domain.Abstractions;
 using Bookify.Domain.Entities.Bookings;
+using Dapper;
 using System.Data;
 
 namespace Bookify.Application.Bookings.GetBooking;
@@ -10,12 +11,12 @@ namespace Bookify.Application.Bookings.GetBooking;
 internal sealed class GetBookingQueryHandler : IQueryHandler<GetBookingQuery, BookingResponse>
 {
     private readonly ISqlConnectionFactory _sqlConnectionFactory;
-    private readonly IUserContext _userContext;
+    //private readonly IUserContext _userContext;
 
-    public GetBookingQueryHandler(ISqlConnectionFactory sqlConnectionFactory, IUserContext userContext)
+    public GetBookingQueryHandler(ISqlConnectionFactory sqlConnectionFactory)
     {
         _sqlConnectionFactory = sqlConnectionFactory;
-        _userContext = userContext;
+        //_userContext = userContext;
     }
 
     public async Task<Result<BookingResponse>> Handle(GetBookingQuery request, CancellationToken cancellationToken)
@@ -43,17 +44,17 @@ internal sealed class GetBookingQueryHandler : IQueryHandler<GetBookingQuery, Bo
             WHERE id = @BookingId
             """;
 
-        BookingResponse? booking = await connection.QueryFirstOrDefaultAsync<BookingResponse>(
+        var booking = await connection.QueryFirstOrDefaultAsync<BookingResponse>(
             sql,
             new
             {
                 request.BookingId
             });
 
-        if (booking is null || booking.UserId != _userContext.UserId)
+        /*if (booking is null || booking.UserId != _userContext.UserId)
         {
             return Result.Failure<BookingResponse>(BookingErrors.NotFound);
-        }
+        }*/
 
         return booking;
     }
