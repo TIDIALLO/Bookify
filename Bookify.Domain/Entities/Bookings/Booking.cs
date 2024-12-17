@@ -31,6 +31,10 @@ public sealed class Booking : Entity
 
     }
 
+    private Booking()
+    {
+        
+    }
     #region variables
     public Guid ApartmentId { get; private set; }
     public Guid UserId { get; private set; }
